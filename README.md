@@ -1,5 +1,10 @@
 # Prompt Lite+
-codex codex-cli codex-app-server chatgpt openai ai-agent coding-agent developer-tools windows desktop-client delphi vcl lightweight low-resource multi-instance unofficial-client
+[![Release](https://img.shields.io/github/v/release/SbiriJJ/prompt-lite-plus?style=flat-square&label=release&color=blue)](https://github.com/SbiriJJ/prompt-lite-plus/releases/latest)
+[![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D4?style=flat-square)](#requirements)
+[![Codex CLI](https://img.shields.io/badge/Codex%20CLI-tested%200.146.0-6f42c1?style=flat-square)](https://developers.openai.com/codex/)
+[![Downloads](https://img.shields.io/github/downloads/SbiriJJ/prompt-lite-plus/total?style=flat-square&color=brightgreen)](https://github.com/SbiriJJ/prompt-lite-plus/releases)
+[![License](https://img.shields.io/badge/license-Custom%20EULA-lightgrey?style=flat-square)](EULA.md)
+[![Status](https://img.shields.io/badge/status-unofficial-orange?style=flat-square)](LEGAL_NOTICE.md)
 
 Prompt Lite+ is an independent, lightweight Windows interface for a locally
 installed Codex CLI `app-server`. It focuses on project directories,
