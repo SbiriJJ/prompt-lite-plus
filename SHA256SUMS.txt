@@ -1,1 +1,1 @@
-33e3af0febd377d07c6606221ab5376882707ac2fb240d7f7885abd6098efff9  PromptLitePlus-v1.3-build9713-Win64.zip
+d6f0ca55e00f4f2f6b78f5e01fa763ebb2fc1c27ccc915e236ac8133b30ba768  PromptLitePlus-v1.3-build9713-Win64.zip
