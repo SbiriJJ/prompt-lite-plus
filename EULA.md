@@ -1,7 +1,7 @@
 # Prompt Lite+ End User License Agreement
 
-Version 1.2  
-Effective date: 29 July 2026  
+Version 1.3  
+Effective date: 5 August 2026  
 Copyright © 2026 Giacomo Boffa Sandalina. All rights reserved.
 
 ## 1. Acceptance
