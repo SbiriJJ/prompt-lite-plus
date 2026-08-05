@@ -2,7 +2,7 @@
 
 Release date: 5 August 2026  
 Build: 9713  
-Complete executable version: 1.3.9713.22639  
+Complete executable version: 1.3.9713.22963  
 Platform: 64-bit Windows  
 Tested with Codex CLI: 0.146.0
 
