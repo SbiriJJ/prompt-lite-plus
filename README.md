@@ -28,7 +28,7 @@ system load.
 
 ## Download and installation
 
-1. Download `PromptLitePlus-v1.2-build9706-Win64.zip` from the release assets.
+1. Download `PromptLitePlus-v1.3-build9713-Win64.zip` from the release assets.
 2. Verify the archive against the published SHA-256 checksum.
 3. Extract the complete archive into a writable directory.
 4. Start `PromptLitePlus.exe`.
@@ -66,7 +66,7 @@ included with Prompt Lite+.
 Prompt Lite+ depends on the `app-server` protocol exposed by the installed Codex
 CLI. A later Codex CLI release may require a corresponding Prompt Lite+ update.
 
-Prompt Lite+ 1.2 was tested with Codex CLI 0.146.0.
+Prompt Lite+ 1.3 was tested with Codex CLI 0.146.0.
 
 Prompt Lite+ can be used on the same computer as the ChatGPT desktop app, but
 do not use both applications on the same project at the same time.
