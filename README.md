@@ -26,6 +26,18 @@ It is designed as a lightweight interface for computers with limited
 performance, particularly where the ChatGPT desktop app causes excessive
 system load.
 
+## What's new in 1.3
+
+- Compact context-usage and account-limit bars make remaining capacity easier
+  to read without expanding the interface.
+- Changing the model now refreshes the context and limit information for the
+  selected model.
+- Multi-instance startup and server thread classification are more reliable.
+- Activity, conversation, agent, and changed-file lists provide consistent
+  double-click guidance, with improved dark-theme checkbox rendering.
+
+See [Release Notes](RELEASE_NOTES.md) for the complete 1.3 summary.
+
 ## Download and installation
 
 1. Download `PromptLitePlus-v1.3-build9713-Win64.zip` from the release assets.
