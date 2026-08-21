@@ -1,30 +1,33 @@
-# Prompt Lite+ 1.3
+# Prompt Lite+ 1.4
 
-Release date: 5 August 2026  
-Build: 9713  
-Complete executable version: 1.3.9713.22963  
+Release date: 21 August 2026  
+Build: 9729  
+Complete executable version: 1.4.9729.22919  
 Platform: 64-bit Windows  
-Tested with Codex CLI: 0.146.0
+Tested with Codex CLI: 0.149.0
 
 ## Highlights
 
-- Context usage is shown as a compact used/total bar, with an orange warning
-  when usage reaches 80%.
-- Account rate limits retain their original information while replacing each
-  available percentage with a compact remaining-capacity bar.
-- Changing the model now refreshes context and account-limit information for
-  the newly selected model.
-- Missing rate-limit windows remain hidden instead of displaying an empty bar.
-- Idle rate-limit polling is exposed as the compact **IP** option with its
-  configured interval in the hint.
-- Automatic startup selection no longer interrupts a second instance when the
-  conversation is already open elsewhere; the conversation area asks the user
-  to select another project.
-- Secondary and spawned-agent conversations are classified more reliably from
-  the structured thread source supplied by Codex CLI.
-- Activity, project-conversation, spawned-agent, subagent, and changed-file
-  areas now provide consistent double-click guidance.
-- Raize checkbox rendering is stabilized for the dark theme.
+- Fast `Ctrl+Enter` is handled without losing the shortcut or leaving a key in
+  a logically pressed state.
+- After a prompt is sent, the prompt editor is cleared and positioned on its
+  first line.
+- Incoming agent output is attached to the correct transcript block and thread
+  so the first response cannot be inserted into the submitted prompt.
+- The prompt editor expands into the space released when the Goal panel is not
+  visible.
+- Conversation backgrounds are recalculated for the new text width after a
+  window resize.
+- Full Load shows the speaker together with each timestamp.
+- **Show in Explorer** selects the referenced local file instead of opening the
+  default Explorer page.
+- Multiple account-limit buckets are retained. **Limits+** identifies the
+  additional data and its hint lists every available bucket.
+- Pinned conversations remain in their project list and are also ordered at
+  the top for quick access.
+- Codex CLI 0.149.0 app-server schemas were checked explicitly. Sub-agent,
+  spawn-agent, nickname, role, parent-thread, and collaboration-state
+  structures remain compatible with the current UI.
 
 ## Existing core features
 
