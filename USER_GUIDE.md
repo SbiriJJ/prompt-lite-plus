@@ -1,6 +1,6 @@
 # Prompt Lite+ User Guide
 
-Version 1.3
+Version 1.4
 
 ## 1. What Prompt Lite+ is
 
@@ -79,6 +79,19 @@ The settings panel exposes the protocol settings directly.
 - **Auto-review** allows the configured reviewer to handle applicable
   approvals.
 
+When Codex CLI explicitly permits a persistent MCP tool approval, the MCP
+request window also shows **Always allow**. This approves the current request
+and stores the matching tool policy across future Codex sessions. The option
+is not inferred by Prompt Lite+ and is absent when the server does not offer
+it.
+
+Use **MCP...** beside the approval setting to review stored permanent MCP and
+connected-app tool approvals. The list includes per-tool approvals and an
+app-wide default approval when one is configured. Selecting an entry asks for
+confirmation, changes that policy back to `prompt`, reloads the configuration,
+and verifies that the effective policy was revoked. A policy from a
+higher-priority configuration layer is reported if it remains effective.
+
 `dangerFullAccess` is displayed in red. It can permit operations outside the
 normal workspace restrictions. Use it only when you understand and accept the
 consequences.
@@ -100,11 +113,18 @@ changes automatically correct. Review important work and maintain backups.
 The Send button changes color while the agent is working. Activity status and
 elapsed time are shown beside the Activity title.
 
+`Ctrl+Enter` sends the prompt. Prompt Lite+ processes this shortcut without
+altering the prompt text or leaving a key logically pressed. After sending, the
+empty prompt editor returns to its first line.
+
 ## 7. Conversation and activity
 
 The main conversation uses a configurable rolling line limit. The complete
 conversation remains available through **Full Load**, with timestamps,
 speaker information, and text search.
+
+Conversation rendering is recalculated when the window is resized so block
+backgrounds continue to match the current text width.
 
 Manual scrolling disables automatic transcript scrolling. Use the down-arrow
 button to return to the bottom and re-enable auto-scroll.
@@ -139,6 +159,8 @@ Prompt Lite+ displays context-window use, turn/thread token totals, and the rate
 information supplied by the server. Context is shown as used tokens over total
 capacity. Available account-limit percentages are shown as compact remaining
 capacity bars; a bar is omitted when the server does not supply that window.
+When the server supplies more than the usual account-limit buckets, the title
+changes to **Limits+** and the complete set is available in the hint.
 
 **Idle polling** requests rate information at a low frequency while no turn is
 running. Token events received during work update the displayed counters
@@ -155,7 +177,7 @@ all Prompt Lite+ instances/app-server processes to be disconnected.
 
 CLI maintenance output is streamed into its dialog so progress remains visible.
 
-Prompt Lite+ 1.3 was tested with Codex CLI 0.146.0.
+Prompt Lite+ 1.4 was tested with Codex CLI 0.149.0.
 
 ## 11. Prompt Lite+ application updates
 
