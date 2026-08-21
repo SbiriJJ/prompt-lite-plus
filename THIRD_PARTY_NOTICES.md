@@ -1,7 +1,7 @@
 # Prompt Lite+ Third-Party Notices
 
-Document version 1.3  
-Last updated: 5 August 2026
+Document version 1.4  
+Last updated: 21 August 2026
 
 Prompt Lite+ interoperates with or is built using third-party products. Those
 products remain governed by their own licenses and terms.
