@@ -11,6 +11,10 @@ installed Codex CLI `app-server`. It focuses on project directories,
 persistent conversations, approvals, tools, diffs, token information, and
 low-overhead parallel work.
 
+## Screenshot
+
+![Prompt Lite+ running on Windows](assets/prompt-lite-plus-demo.png)
+
 Prompt Lite+ is not affiliated with, endorsed by, sponsored by, or supported by
 OpenAI. Agent operations are performed by Codex CLI under the permissions
 selected by the user. The user is responsible for reviewing and authorizing
