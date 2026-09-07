@@ -1,7 +1,7 @@
 # Prompt Lite+ Privacy Notice
 
-Version 1.4  
-Last updated: 21 August 2026
+Version 1.5  
+Last updated: 7 September 2026
 
 ## Summary
 
@@ -33,6 +33,12 @@ The session log is overwritten when the first Prompt Lite+ instance starts.
 Additional concurrently running instances append synchronized entries to that
 same current-session log.
 
+Pending asynchronous questions and unsent reply drafts are held in application
+memory for the current session. Unsent drafts are not written to the INI file.
+When the User sends a reply, it is forwarded to Codex CLI as conversation input.
+Questions included in conversation history may also be present in Prompt Lite+'s
+local rolling-history cache and in Codex CLI's own persisted history.
+
 ## Data handled by Codex CLI and other tools
 
 Codex CLI controls authentication, conversation persistence, OpenAI requests,
@@ -52,11 +58,15 @@ Prompt Lite+ may initiate network activity when:
 - the Codex CLI maintenance feature checks package/version information or
   performs an installation/update selected by the User;
 - the User chooses Download for an HTTP or HTTPS transcript link;
-- a future public-update provider is configured.
+- scheduled or manual Release/Rolling checks contact the public GitHub
+  repository and download an available application update.
 
-The currently implemented Prompt Lite+ application update check is local: it
-compares the running executable with a staged executable in the `update`
-directory.
+Application update checks send standard HTTPS request information (including
+IP address and an application/version User-Agent) to GitHub and its download
+infrastructure. They do not send conversation text, project paths or prompts.
+The selected channel, frequency and last-check timestamps are stored in the
+local INI. Packages are verified and staged in `update`; personal INI settings
+are not replaced. Local staged executable checks remain supported.
 
 ## Personal and confidential data
 

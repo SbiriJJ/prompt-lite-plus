@@ -24,3 +24,10 @@ Error=$002A233E
 
 [Links]
 DownloadDirectory=
+
+[Updates]
+Channel=release
+ReleaseFrequency=daily
+RollingFrequency=startup
+LastReleaseCheck=0
+LastRollingCheck=0

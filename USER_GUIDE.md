@@ -1,6 +1,6 @@
 # Prompt Lite+ User Guide
 
-Version 1.4
+Version 1.5
 
 ## 1. What Prompt Lite+ is
 
@@ -39,11 +39,19 @@ the version or text of `EULA.md` changes, the disclaimer is displayed again.
 ## 3. Projects and conversations
 
 Projects are grouped from the working directories reported by Codex threads.
-The project name is normally the final directory name.
+The project name is normally the final directory name. Threads without a
+stored working directory, threads using the Windows Documents directory, and
+conversations stored in Codex-managed Documents workspaces are grouped under
+**`***Documents***`**.
 
-- Select a project to load its main conversations.
-- **New** prepares a new conversation and working directory; the thread is
-  created when its first prompt is sent.
+- Select a project to load its main conversations into the conversation
+  dropdown. Selecting a conversation opens it immediately.
+- **New** prepares a new conversation in the selected working directory,
+  including a directory that already has conversations. The thread is created
+  when its first prompt is sent.
+- **Rescan** rebuilds the project list from the working directories currently
+  reported by Codex server threads. Normal thread refresh only updates the
+  selected project.
 - **Duplicate** forks the selected conversation into a new thread.
 - **Pin** and **Unpin** preserve the selected conversation's pinned state in
   Codex CLI. Pinned conversations are marked with `[PIN]`.
@@ -60,12 +68,29 @@ do not use both applications on the same project at the same time.
 Spawn-agent conversations are available for review under their parent
 conversation when the server exposes the required metadata.
 
+Large conversations are read through summarized paginated server history. The
+normal conversation window caches only the recent messages needed for its
+configured rolling line limit. The cached view is displayed immediately. If
+the server reports changed thread metadata, it is refreshed in the background
+while the current cached text remains visible. Historical Activity, tool
+output, and diffs are deliberately
+excluded from the normal reload path. **Full Load** opens a separate non-modal
+search window, uses larger message-only pages, shows page/turn progress, and
+provides **Stop loading**. Stopping keeps and displays the history pages already
+received, marked as partial.
+
 ## 4. Model and reasoning
 
-Model and reasoning selections are loaded from the server catalog and belong
-to the current thread. A manual change is sent to the server immediately; the
-effective server notification remains authoritative. Changing the model also
-requests fresh context and account-limit information for that model.
+Model choices and supported reasoning levels are loaded from the server catalog.
+The selected values belong to the current thread. On opening a conversation,
+available thread metadata updates the selectors before the complete settings
+snapshot arrives. Missing values are left unknown until confirmed by the server.
+Metadata describes the configured model, not per-call execution telemetry.
+
+A manual change is sent to the server immediately; the current server notification
+remains authoritative. Refreshing the conversation list does not overwrite a
+manual selection. Changing the model refreshes account limits and clears the old
+model's context indicator until Codex supplies context usage for the new model.
 
 Different threads may use different models and reasoning levels.
 
@@ -117,6 +142,25 @@ elapsed time are shown beside the Activity title.
 altering the prompt text or leaving a key logically pressed. After sending, the
 empty prompt editor returns to its first line.
 
+### Asynchronous agent questions
+
+When the model sends structured questions, they appear in the conversation with
+their suggested answers. **Questions (n)** beside the prompt opens a non-modal
+window for questions received during the current application session. Choose a
+question, select a suggestion or type freely, then press **Send reply**.
+
+During an active task the reply is sent as steering input, without interrupting
+the task. If the task has ended, the window states that sending starts a new
+turn in the same conversation. The normal prompt draft and its file attachments
+are not consumed by a question reply.
+
+A question is marked answered only after the server accepts the submission.
+Errors retain the draft and are shown in the main window. There is no automatic
+retry or automatic answer. Closing the question window retains drafts in memory;
+select the original conversation to send them later. Unsent drafts are not saved
+across application restarts. Historical questions remain readable in the normal
+transcript and Full Load, but are not all re-opened as pending questions.
+
 ## 7. Conversation and activity
 
 The main conversation uses a configurable rolling line limit. The complete
@@ -132,6 +176,8 @@ button to return to the bottom and re-enable auto-scroll.
 Activity is intentionally compact and has a configurable row limit. Tool
 progress replaces the current status text instead of creating heavy animated
 output. Double-click an Activity row marked `[diff]` to open its stored diff.
+Activity and diffs received during the current session remain available;
+historical tool details are not downloaded automatically when a thread opens.
 
 ## 8. Files, links, and diffs
 
@@ -166,6 +212,12 @@ changes to **Limits+** and the complete set is available in the hint.
 running. Token events received during work update the displayed counters
 without an additional high-frequency polling loop.
 
+**Conversation total** is the cumulative token count reported for that thread,
+not a daily account total. It includes input tokens reused from cache. **Task**
+is the increment during the current turn; neither value is a monetary cost.
+Changing the conversation title or selecting another model does not intentionally
+reset the conversation total.
+
 ## 10. Codex CLI maintenance
 
 **CLI Setup** shows the detected executable, installed version, latest version,
@@ -177,11 +229,38 @@ all Prompt Lite+ instances/app-server processes to be disconnected.
 
 CLI maintenance output is streamed into its dialog so progress remains visible.
 
-Prompt Lite+ 1.4 was tested with Codex CLI 0.149.0.
+Prompt Lite+ requires Codex CLI 0.152.0 or later. Older versions cannot start
+the app-server from Prompt Lite+. Version 1.5 was checked against CLI 0.153.4.
 
 ## 11. Prompt Lite+ application updates
 
-A local update is staged as:
+Open **Config** using the gear button in the top toolbar. Choose one channel:
+
+- **Release**: numbered public releases. Check every startup, daily (default),
+  or weekly.
+- **Rolling**: the latest published working build, for users who need current
+  changes. Check every startup (default for this channel), hourly, or daily.
+
+Only the selected channel is checked. Daily checks become due at local
+midnight, including while the application stays open. Weekly checks become due
+seven calendar days after the last attempt. Hourly checks use elapsed time.
+Missed checks run on the next eligible startup/timer tick; the scheduler wakes
+once per minute. Check timestamps are stored in the local INI, not the registry.
+Failed attempts follow the same selected schedule and do not cause retry loops.
+
+Checks and downloads run in the background, only while this is the sole
+Prompt Lite+ instance. A check already in progress can finish if another
+instance opens, but installation still requires a single instance. **Save and
+check now** performs a manual check. GitHub receives normal HTTPS request data
+and the application version, not conversation contents.
+
+An available build is downloaded to `update`, its SHA-256 and fixed EXE version
+are checked, and the gear button is highlighted. Existing equal/newer staged
+builds are not downloaded again. An older build never replaces a newer one.
+Open Config when idle and use **Restart and Update...** to review the version
+and confirm. An active task is never automatically interrupted.
+
+The local staging mechanism remains available:
 
 ```text
 update\PromptLitePlus.exe
@@ -197,15 +276,36 @@ If a newer version is available, the dialog displays both versions:
 - **Don't Update** continues using the current version without modifying the
   executable.
 
-An update is never applied merely because it was detected.
+An update is never applied merely because it was detected. Remote packages
+include documentation for that build; installation updates those documents but
+never replaces the user's INI. An updated EULA triggers the existing acceptance
+check. Packages use the readable name `PromptLitePlus-M.m.G.T-Win64.zip`, with
+the full fixed EXE version. GitHub supplies the download URL and SHA-256; no
+separate manifest is required. If multiple matching ZIPs exist, the newest
+numeric version wins. Old ZIP names without the full version are reported and
+not downloaded automatically. The Rolling channel is available after its first publication.
 
 ## 12. Local configuration
+
+**Config** exposes only the conversation line limit (minimum 100), Activity row
+limit (minimum 1), conversation color presets, update channel and check
+frequencies. The three presets are Classic charcoal, Cool slate and Warm
+graphite; all keep the existing dark application theme. **Keep current colors**
+preserves any colors edited manually in the INI. Smaller limits trim the visible
+content; raising a limit does not restore already discarded rows until history
+is loaded again. Colors apply to the visible conversation, deferred until the
+current streaming block is complete if needed.
+
+The Download directory is remembered automatically by the link Download command
+and is intentionally not exposed in Config. Internal options and Codex server
+settings are not exposed there either.
 
 Prompt Lite+ uses:
 
 - the INI beside `PromptLitePlus.exe` for UI preferences, selected
   project/thread, accepted EULA version and fingerprint, rolling limits,
-  conversation colors, and download directory;
+  conversation colors, download directory, update channel/frequencies and
+  last-check timestamps;
 - `HKEY_CURRENT_USER\Software\PromptLitePlus` for common Codex-related settings;
 - shared memory only for lightweight multi-instance coordination;
 - `PromptLitePlus.startup.log` for the current diagnostic session.
@@ -216,7 +316,7 @@ the same log with their process IDs.
 ## 13. Troubleshooting
 
 - If **Send** is disabled, connect the server first.
-- If Codex CLI is missing or obsolete, open **CLI Setup**.
+- If Codex CLI is missing or older than 0.152.0, open **CLI Setup**.
 - If a conversation reports that it is already open, close it in the other
   Prompt Lite+ instance.
 - If a project is absent, refresh after Codex thread discovery completes.
